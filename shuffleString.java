@@ -1,5 +1,3 @@
-import javax.management.relation.RelationTypeSupport;
-import javax.sound.sampled.SourceDataLine;
 
 public class shuffleString {
     public static String shuffleS(String s,int[]in){
