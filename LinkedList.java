@@ -202,6 +202,8 @@ public class LinkedList {
         }
         return false;
     }
+    // remove linked list cycle
+    
 
 
     public static void main(String[]args) {
