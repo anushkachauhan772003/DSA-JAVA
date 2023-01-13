@@ -189,30 +189,49 @@ public class LinkedList {
        
     }
 
+    //to detect linkedList cycle
+    public boolean  llcycle(Node head){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next==null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public static void main(String[]args) {
         LinkedList ll=new LinkedList();
         ll.addFirst(2);
         ll.print();
-        ll.addFirst(1);
+        ll.addFirst(3);
         ll.print();
-        ll.addLast(2);
+        ll.addLast(0);
         ll.print();
-        ll.addLast(1);
-       ll.print();
+        ll.addLast(-4);
+        ll.print();
+       
        System.out.println("pal--"+ll.checkPalindrome());
-       ll.add(2,7);
+       //ll.add(2,7);
        ll.print();
-       ll.removeFirst();
+       //ll.removeFirst();
        ll.print();
        System.out.println(ll.itrSearch(7));
        System.out.println(ll.itrSearch(0));
        System.out.println(ll.recSearch(4));
-       ll.reverse();
+       //ll.reverse();
        ll.print();
        System.out.println(ll.size);
-       ll.deleteFromEnd(1);
+       //ll.deleteFromEnd(1);
        ll.print();
+       ll.llcycle(head);
+       ll.print();
+       System.out.println(ll.llcycle(head));
+
 
     }
 }
