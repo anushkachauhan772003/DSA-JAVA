@@ -203,9 +203,87 @@ public class LinkedList {
         return false;
     }
     // remove linked list cycle
-    
+    public static void removeCycle(){
+        Node slow=head;
+        Node fast=head;
+        boolean cycle=false;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(fast==slow){
+                cycle=true;
+                break;
+            }
+        }
+        if(cycle==false)
+        return;
+        //finding the meeting point
+        slow=head;
+        Node prev=null;
+        while(slow!=fast){
+            prev=fast;
+            slow=slow.next;
+            fast=fast.next;
+        }
+        //remove cycle--->last.next=null
+        prev.next=null;
+    }
+    public Node getMid(Node head){
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;//midNode
+    }
+
+    public Node merge(Node head1,Node head2){
+        Node mergeLL=new Node(-1);
+        Node temp=mergeLL;
+
+        while(head1!=null && head2!=null){
+            if(head1.data<=head2.data){
+                temp.next=head1;
+                head1=head1.next;
+                temp=temp.next;
+            }
+            else{
+                temp.next=head2;
+                head2=head2.next;
+                temp=temp.next;
+            }
+        }
+        while(head1!=null){
+            temp.next=head1;
+            head1=head1.next;
+            temp=temp.next; 
+        }
+        while(head2!=null){
+            temp.next=head2;
+            head2=head2.next;
+            temp=temp.next;
+        }
+        return mergeLL.next;
+    }
+    //performing merge sort
+    public Node mergeSort(Node head){
+        //base coondition
+        if(head==null && head.next==null)
+        return head;
+        //find mid
+        Node mid=getMid(head);
+        //left half and right half ms
+        Node rightHead=mid.next;
+        mid.next=null;
+        
+        Node newLeft=mergeSort(head);
+        Node newRight=mergeSort(rightHead);
+        //merge 
+        return merge(newLeft,newRight);
 
 
+    }
     public static void main(String[]args) {
         LinkedList ll=new LinkedList();
         ll.addFirst(2);
@@ -215,6 +293,8 @@ public class LinkedList {
         ll.addLast(0);
         ll.print();
         ll.addLast(-4);
+        ll.print();
+        ll.head=ll.mergeSort(ll.head);
         ll.print();
        
        System.out.println("pal--"+ll.checkPalindrome());
@@ -233,6 +313,7 @@ public class LinkedList {
        ll.llcycle(head);
        ll.print();
        System.out.println(ll.llcycle(head));
+     
 
 
     }
