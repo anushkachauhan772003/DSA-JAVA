@@ -157,7 +157,7 @@ public class LinkedList {
         }
         return slow;
     }
-
+//check palindrome....
     public boolean checkPalindrome(){
         if(head==null || head.next==null)
         return false;

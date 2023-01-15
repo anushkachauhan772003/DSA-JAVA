@@ -1,5 +1,4 @@
-
-
+import java.util.*;
 public class leetcode704BinaryS{
     public static int find(int[]nums,int target){
         int start=0;
