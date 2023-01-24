@@ -17,6 +17,23 @@ public class graph {
         this.adj[u].add(v);
         this.adj[v].add(u);
     }
+    public void dfs(){
+        boolean[]visited=new boolean[V];
+        for(int v=0;v<V;v++){
+            if(!visited[v]){
+                dfs(v,visited);
+            }
+        }
+    }
+    public void dfs(int v,boolean[]visited){
+        visited[v]=true;
+        System.out.println(v+" ");
+        for(int w:adj[v]){
+            if(!visited[w]){
+                dfs(w,visited);
+            }
+        }
+    }
    public static void main(String[]args){
         graph g=new graph(4);
         g.addEdge(0,1);
