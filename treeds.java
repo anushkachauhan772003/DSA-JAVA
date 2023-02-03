@@ -9,7 +9,7 @@ public class treeds {
         Node left;
         Node right;
 
-        Node(int data){
+        public Node(int data){
             this.data=data;
             this.left=left;
             this.right=right;
@@ -105,6 +105,47 @@ public static int heightTree(Node root){
     return 1+Math.max(left,right);
 
 }
+public static int diameter(Node root){
+    if(root==null)
+    return 0;
+    int dia1=diameter(root.left);
+    int dia2=diameter(root.right);
+    int dia3=heightTree(root.left)+heightTree(root.right)+1;
+
+    return Math.max(dia3,Math.max(dia1,dia2));
+
+}
+static class treeInfo{
+    int ht;
+    int diam;
+
+    treeInfo(int ht,int diam){
+         this.ht=ht;
+         this.diam=diam;
+    }
+}
+public static treeInfo diameter1(Node root){
+    if(root==null)
+    return new treeInfo(0, 0);
+
+    treeInfo left=diameter1(root.left);
+    treeInfo right=diameter1(root.right);
+
+    int myheight=Math.max(left.ht,right.ht)+1;
+
+    int dia1=left.diam;
+    int dia2=right.diam;
+    int dia3=left.ht+right.ht+1;
+    int myDiam=Math.max(Math.max(dia1,dia2),dia3);
+
+    treeInfo myInfo=new treeInfo(myheight,myDiam);
+
+    return myInfo;
+
+}
+
+//subtree of another tree
+
     public static void main(String[]args){
         int nodes[]={1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
         BinaryTree tree=new BinaryTree(); 
@@ -115,5 +156,7 @@ public static int heightTree(Node root){
        System.out.println(countNode(root));
        System.out.println(sumOfNodes(root));
        System.out.println(heightTree(root));
+       System.out.println(diameter(root));
+       System.out.println(diameter1(root).diam);
     }
 }
