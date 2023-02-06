@@ -1,26 +1,27 @@
 import java.util.*;
 
 public class recursionCount{
-    public static int countThe(int s,int target,int i,int n,int []arr){
-        if(i==n){
-            if(s==target)
-            return 1;
-            return 0;
-
+    private void findCom(List<List<Integer>>res,List<Integer>ans,int ind,int target,int arr[]){
+        if(target==0){
+            res.add(new ArrayList<>(ans));
+            return;
         }
-        s+=arr[i];
-        int l=countThe(s, target, i+1, n, arr);
-        s-=arr[i];
-        int r=countThe(s, target, i+1, n, arr);
-        return l+r;
-
+        for(int i=ind;i<arr.length;i++){
+            if(i>ind && (arr[i]==arr[i-1]))continue;
+            if(arr[i]>target)break;
+               
+            ans.add(arr[i]);
+            findCom(res,ans,ind+1,target-arr[i],arr);
+            ans.remove(ans.size()-1);
+            }
     }
-    public static void main(String[]args){
-        int ar[]={10,1,2,7,6,1,5};
-        int sum=8;
-        int n=7;
-        Arrays.sort(ar);
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
        
-        System.out.println( countThe(0, sum, 0, n, ar));
+        Arrays.sort(candidates);
+         List<List<Integer>>res=new ArrayList<List<Integer>>();
+        findCom(res,new ArrayList<>(),0,target,candidates);
+        return res;
     }
+    
+    
 }
