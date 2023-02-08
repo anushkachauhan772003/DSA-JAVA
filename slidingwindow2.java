@@ -1,26 +1,34 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.util.LinkedList;
 
 public class slidingwindow2 {
     public static long[] firstNegative(long[]a,int n,int k){
         int i=0;
         int j=0;
-        ArrayList<Long>list=new ArrayList<>();
-        ArrayList<Long>ans=new ArrayList<>();
-
+        long[]result=new long[n-k+1];
+        int idx=0;
+        Queue<Long>q=new LinkedList<>();
         while(j<n){
             if(a[j]<0){
-                list.add(a[j]);
+                q.add(a[j]);
             }
             if(j-i+1<k)
             j++;
             else if(j-i+1==k){
-                if(list.size()==0)
-                 ans.add((long)0);
-
-                else
-                ans.add(list.get(0));
-            }
+                if(q.isEmpty())
+                result[idx++]=0;
+                else{
+                long num=q.peek();
+                result[idx++]=num;
+                if(num==a[i])
+                q.poll();
+                }
+                i++;
+                j++;
+             }
+            
         }
+        return result;
     }
     public static void main(String[]args){
         long A[] = {-8, 2, 3, -6, 10};

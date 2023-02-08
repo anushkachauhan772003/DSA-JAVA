@@ -1,32 +1,33 @@
+import java.util.*;
 public class slidingwindow1 {
-   public static int countAnagram(String s,String t){
-    int k=t.length();
-    int start=0;
+   public static long maxSum(int k,int n, ArrayList<Integer>list){
+    int i=0;
     int j=0;
-    int []map=new int[256];
-    int[]map2=new int[256];
-    int count=0;
-    int ans=0;
-    for(int i=0;i<s.length();i++){
-        map[t.charAt(i)]++;
-        map2[s.charAt(i)]++;
+    long sum=0;
+    long max=0;
+    while(j<n){
+        sum+=list.get(j);
+        if(j-i+1<k)
+        j++;
+       else if(j-i+1==k){
+        max=Math.max(max,sum);
+        sum-=list.get(i);
+        i++;
+        j++;
+       }
     }
-    while(j<s.length()){
-        if(j-start+1<k){
-            j++;
-        }
-        if(j-start+1==k){
-            if(map[s.charAt(j)]==map2[t.charAt(j)])
-            ans++;
-           
-        }
-        
-    }
-    return count;
-    }
+    return max;
+   }
+    
     public static void main(String[]args){
-        String s="aababaabaa";
-        String t="aaba";
-        System.out.println(countAnagram(s, t));
+       int n=4;
+       int k=2;
+       ArrayList<Integer>list=new ArrayList<>();
+       list.add(100);
+       list.add(200);
+       list.add(300);
+       list.add(400);
+       
+    System.out.println(maxSum(k,n,list));
     }
 }
