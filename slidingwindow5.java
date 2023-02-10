@@ -11,14 +11,15 @@ public class slidingwindow5 {
         }
         else if(sum==k){
             max=Math.max(max,(j-i+1));
-            ++j;
+            j++;
         }
         else if(sum>k){
             while(sum>k){
-                sum=sum-nums[i];
-                ++i;
+                sum-=nums[i];
+                i++;
             }
-           
+            
+            j++;
         }
        
     }
