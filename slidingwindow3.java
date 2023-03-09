@@ -26,7 +26,6 @@ public class slidingwindow3 {
             else if(j-i+1==k){
                 if(count==k)
                 ans++;
-                char ch2=
             }
         }
 

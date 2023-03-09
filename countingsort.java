@@ -1,39 +1,33 @@
 public class countingsort {
-    public static int getMax(int[]arr,int n){
-        int max=arr[0];
-        for(int i=1;i<n;i++){
-            if(max<arr[i])
-            max=arr[i];
+    public static int[] countitngSort(int[]nums){
+        int max=nums[0];
+        int n=nums.length;
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]>max){
+                max=nums[i];
+            }
         }
-        return max;
-    }
-    public static int[] count(int[]nums,int n){
-        int[]output=new int[n+1];
-        int max=getMax(nums, n);
-        int count[]=new int[max+1];
-
-        for(int i=0;i<=max;i++){
-            count[i]=0;
+        int []count=new int[max+1];
+        int output[]=new int[n];
+        for(int i=0;i<nums.length;i++){
+            ++count[nums[i]];
         }
-        for(int i=0;i<n;i++){
-            count[nums[i]]++;
-        }
+        //for positioning in the count array
         for(int i=1;i<=max;i++){
-            count[i]+=count[i-1];
+            count[i]=count[i]+count[i+1];
         }
         for(int i=n-1;i>=0;i--){
-            output[count[nums[i]]-1]=nums[i];
-            count[nums[i]]--;
+            output[--count[nums[i]]]=nums[i];
         }
         for(int i=0;i<n;i++){
             nums[i]=output[i];
-            System.out.print(nums[i]+" ");
         }
-        return nums;
+        return  nums;
+
     }
     public static void main(String[]args){
-        int []nums={2,3,3,4,5,7,7};
-        System.out.println(count(nums, 7));
+        int []nums={2,1,1,0,2,5,4,0,2,8};
+        System.out.println(countitngSort(nums));
 
     }
 }
